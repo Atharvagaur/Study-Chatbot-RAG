@@ -1,0 +1,15 @@
+langchain==0.3.27
+langchain-core==0.3.76
+langchain-community==0.3.30
+langchain-text-splitters
+langchain-chroma
+langchain-huggingface
+langchain-groq
+sentence-transformers
+beautifulsoup4
+python-dotenv
+ipykernel
+fastapi
+uvicorn[standard]
+python-multipart
+pypdf
