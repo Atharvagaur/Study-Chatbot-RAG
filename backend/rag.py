@@ -113,31 +113,31 @@ RETRIEVER_K = 5
 
 
 class RAGService:
-def __init__(self):
-    print("Loading Hugging Face embeddings...")
+    def __init__(self):
+        print("Loading Hugging Face embeddings...")
 
-    self.embeddings = HuggingFaceEmbeddings(
-        model_name="sentence-transformers/all-MiniLM-L6-v2"
-    )
+        self.embeddings = HuggingFaceEmbeddings(
+            model_name="sentence-transformers/all-MiniLM-L6-v2"
+        )
 
-    print("Embeddings loaded successfully.")
+        print("Embeddings loaded successfully.")
 
-    print("Initializing Groq LLM...")
+        print("Initializing Groq LLM...")
 
-    self.llm = ChatGroq(
-        model="openai/gpt-oss-120b"
-    )
+        self.llm = ChatGroq(
+            model="openai/gpt-oss-120b"
+        )
 
-    print("Groq LLM initialized successfully.")
+        print("Groq LLM initialized successfully.")
 
-    self.text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=CHUNK_SIZE,
-        chunk_overlap=CHUNK_OVERLAP,
-    )
+        self.text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=CHUNK_SIZE,
+            chunk_overlap=CHUNK_OVERLAP,
+        )
 
-    self.sessions = {}
+        self.sessions = {}
 
-    print("RAGService initialization complete.")
+        print("RAGService initialization complete.")
 
     def process_pdf(self, filename: str, content: bytes) -> dict:
         reader = PdfReader(io.BytesIO(content))
