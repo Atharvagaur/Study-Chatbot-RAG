@@ -6,9 +6,7 @@ langchain-chroma
 langchain-huggingface
 langchain-groq
 sentence-transformers
-beautifulsoup4
 python-dotenv
-ipykernel
 fastapi
 uvicorn[standard]
 python-multipart

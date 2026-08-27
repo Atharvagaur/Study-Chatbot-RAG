@@ -5,7 +5,7 @@ from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from rag import RAGService
+from backend.rag import RAGService
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("study-chatbot")
@@ -16,7 +16,9 @@ app = FastAPI(title="Study Chatbot")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=[
+        "http://localhost:5173",
+    ],
     allow_methods=["*"],
     allow_headers=["*"],
 )
