@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 
-const API = "/api";
+const API = import.meta.env.VITE_API_URL || "/api";
 
 export default function App() {
   const [session, setSession] = useState(null);
