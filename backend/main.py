@@ -1,4 +1,5 @@
 import logging
+import threading
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, UploadFile, File
@@ -26,16 +27,23 @@ app.add_middleware(
 rag_service: RAGService | None = None
 
 
-@app.on_event("startup")
+
+
 def load_model():
     global rag_service
     logger.info("Loading embeddings and LLM (this may take a moment)...")
+
     try:
         rag_service = RAGService()
         logger.info("RAG service ready.")
-    except Exception as e:
+    except Exception:
         logger.exception("Failed to initialise RAG service")
-        raise
+
+
+@app.on_event("startup")
+def start_model_loading():
+    thread = threading.Thread(target=load_model, daemon=True)
+    thread.start()
 
 
 class ChatRequest(BaseModel):
