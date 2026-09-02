@@ -6,12 +6,12 @@ from langchain_chroma import Chroma
 from langchain.chains import create_history_aware_retriever, create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_community.chat_message_histories import ChatMessageHistory
+from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
 from langchain_core.chat_history import BaseChatMessageHistory
 from langchain_core.documents import Document
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_groq import ChatGroq
-from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from pypdf import PdfReader
 
@@ -114,10 +114,10 @@ RETRIEVER_K = 5
 
 class RAGService:
     def __init__(self):
-        print("Loading Hugging Face embeddings...")
+        print("Loading FastEmbed embeddings...")
 
-        self.embeddings = HuggingFaceEmbeddings(
-            model_name="sentence-transformers/all-MiniLM-L6-v2"
+        self.embeddings = FastEmbedEmbeddings(
+            model_name="BAAI/bge-small-en-v1.5"
         )
 
         print("Embeddings loaded successfully.")

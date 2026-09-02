@@ -3,9 +3,8 @@ langchain-core==0.3.76
 langchain-community==0.3.30
 langchain-text-splitters
 langchain-chroma
-langchain-huggingface
 langchain-groq
-sentence-transformers
+fastembed
 python-dotenv
 fastapi
 uvicorn[standard]
