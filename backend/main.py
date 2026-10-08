@@ -52,7 +52,7 @@ class ChatRequest(BaseModel):
     question: str
 
 
-@app.get("/api/health")
+@app.api_route("/api/health", methods=["GET", "HEAD"])
 def health():
     return {"status": "ok", "model_loaded": rag_service is not None}
 
