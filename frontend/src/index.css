@@ -328,3 +328,9 @@ body {
   opacity: 0.45;
   cursor: not-allowed;
 }
+.katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
+}

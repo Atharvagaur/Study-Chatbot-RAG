@@ -1,9 +1,19 @@
 import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css";
 const API = import.meta.env.VITE_API_URL || "/api";
-
+function normalizeMath(content) {
+  return content
+    // Convert standard LaTeX display delimiters to Markdown math delimiters.
+    .replace(/\\\[([\s\S]*?)\\\]/g, (_, equation) => `\n$$\n${equation.trim()}\n$$\n`)
+    // Convert standard LaTeX inline delimiters.
+    .replace(/\\\(([\s\S]*?)\\\)/g, (_, equation) => `$${equation}$`)
+    // Convert standalone square-bracket equation blocks.
+    .replace(/^\s*\[\s*\n([\s\S]*?)\n\s*\]\s*$/gm, (_, equation) => `\n$$\n${equation.trim()}\n$$\n`);
+}
 export default function App() {
   const [session, setSession] = useState(null);
   const [file, setFile] = useState(null);
@@ -193,7 +203,12 @@ export default function App() {
                   >
                     <div className="bubble">
                       {msg.role === "assistant" ? (
-                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm, remarkMath]}
+                        rehypePlugins={[rehypeKatex]}
+                      >
+                        {normalizeMath(msg.content)}
+                      </ReactMarkdown>
                       ) : (
                         msg.content
                       )}
