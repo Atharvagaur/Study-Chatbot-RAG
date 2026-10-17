@@ -164,7 +164,7 @@ export default function App() {
               )}
             </label>
 
-            {uploading && <p className="status processing">Processing document...</p>}
+            {uploading && <p className="status processing">Processing document (Approx 30 secs)...</p>}
             {uploadError && <p className="status error">{uploadError}</p>}
 
             <button
